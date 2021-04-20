@@ -37,7 +37,7 @@ export default class Func {
    * @param val
    * @returns {boolean}
    */
-  static notEmpty(val: IResouce[]) {
+  static notEmpty(val: string | object[] | null) {
     return !this.isEmpty(val);
   }
 

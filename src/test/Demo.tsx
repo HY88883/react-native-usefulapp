@@ -46,9 +46,9 @@ class Demo extends Component {
   private BackAndroid: any;
 
   componentDidUpdate(
-    prevProps: Readonly<P>,
-    prevState: Readonly<S>,
-    snapshot?: SS,
+    prevProps: Readonly<any>,
+    prevState: Readonly<any>,
+    snapshot?: any,
   ): void {
     if (this.state.visible) {
       setTimeout(() => {
