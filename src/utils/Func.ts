@@ -1,6 +1,5 @@
 import {Platform,NativeModules} from "react-native";
 
-
 /**
  * 通用工具类
  */

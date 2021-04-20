@@ -1,22 +1,32 @@
-
 {
   "name": "react-native-usefulapp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "在rn第三方组件库基础之上再次封装的一些组件集，供日常开发使用，大大提高开发效率",
-  "author": {"name":"huyong","email": "qiubing.it@gmail.com"},
+  "author": {
+    "name": "huyong",
+    "email": "xtu1829473134@163.com",
+    "url": "https://github.com/HY88883"
+  },
   "private": false,
   "license": "MIT",
-  "main": "./src/components/index.tsx",
+  "main": "src/components/index.ts",
+  "module": "src/components/index.ts",
   "keywords": [
-    "Component",
-    "UI",
+    "component",
     "react native",
     "react",
+    "react-native-component",
     "ui",
     "framework",
-    "mobile"
+    "mobile",
+    "native",
+    "android",
+    "ios"
   ],
-  "files": ["src","index.js"],
+  "files": [
+    "src",
+    "index.js"
+  ],
   "homepage": "https://github.com/HY88883/react-native-common-components",
   "repository": {
     "type": "git",
@@ -26,6 +36,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
-    "react-native": "^0.41.2"
-  }
+    "react": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {}
 }
