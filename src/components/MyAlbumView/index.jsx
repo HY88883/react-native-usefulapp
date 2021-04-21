@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, StyleSheet, Modal, ActivityIndicator, Platform, Animated, } from 'react-native';
 import RNFS from 'react-native-fs';
 import ImageViewer from 'react-native-image-zoom-viewer';
-import { scaleSizeH } from '@/utils/index';
+import { scaleSizeH } from '../../utils/index';
 import CameraRoll from '@react-native-community/cameraroll';
 /**
  * 图片展示
@@ -79,7 +79,7 @@ class MyAlbumView extends PureComponent {
          enableImageZoom={true} // 是否开启手势缩放
          saveToLocalByLongPress={true} //是否开启长按保存
          index={curentImage} // 初始显示第几张
-         
+
         // failImageSource={} // 加载失败图片
         loadingRender={this.renderLoad} enableSwipeDown={false} menuContext={{ saveToLocal: '保存图片', cancel: '取消' }} onClick={() => {
                 this._Close();

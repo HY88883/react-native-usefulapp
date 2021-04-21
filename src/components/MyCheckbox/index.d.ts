@@ -4,7 +4,7 @@ interface IMyCheckbox {
     keyProp?: string | number;
     titleProp?: string | number;
     checkboxStyle?: StyleProp<TextStyle>;
-    onChange?: (checked: boolean, item: object, index: number) => void;
+    onChange?: (checked:  , item: object, index: number) => void;
 }
 /**
  * 多选按钮

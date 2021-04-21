@@ -1,8 +1,8 @@
 import React from 'react';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { StyleSheet } from 'react-native';
-import { scaleSizeH, scaleSizeW, setSpText } from '@/utils/index';
-import Divider from "@/components/Divider";
+import { scaleSizeH, scaleSizeW, setSpText } from '../../utils/index';
+import Divider from "../../components/Divider";
 /**
  * 下拉选择框
  * @param props

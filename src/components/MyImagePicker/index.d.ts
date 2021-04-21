@@ -1,7 +1,7 @@
 import { Callback } from 'react-native-image-picker';
 import { PureComponent } from 'react';
 import { StyleProp, ViewProps } from 'react-native';
-import { Idata } from '@/components/Upload';
+import { Idata } from '../../components/Upload';
 export declare const MyImagePicker: {
     launchCamera: (callback: any) => void;
     launchImageLibrary: (callback: any) => void;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, ActivityIndicator, } from 'react-native';
-import { scaleSizeW, setSpText } from '@/utils/index';
-import Touchable from '@/components/Touchable';
+import { scaleSizeW, setSpText } from '../../utils/index';
+import Touchable from '../../components/Touchable';
 /**
  * 按钮
  * @param props

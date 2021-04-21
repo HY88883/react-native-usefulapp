@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {MyCheckbox} from '@/components/index';
+import {MyCheckbox} from '../../components/index';
 
 export default class CheckboxDemo extends Component {
   render() {

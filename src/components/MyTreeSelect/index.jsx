@@ -1,4 +1,4 @@
-import { setSpText } from '@/utils/index';
+import { setSpText } from '../../utils/index';
 import TreeSelect from 'react-native-tree-select';
 import React from 'react';
 import { StyleSheet } from 'react-native';

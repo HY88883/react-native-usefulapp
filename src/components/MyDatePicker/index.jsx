@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { DatePicker, List } from '@ant-design/react-native';
-import Func from "@/utils/Func";
+import Func from "../../utils/Func";
 export default MyDatePicker;
 /**
  * 日期选择器

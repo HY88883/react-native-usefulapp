@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Alert, Image, ScrollView, StyleSheet, Text, View,} from 'react-native';
 import {Provider} from '@ant-design/react-native';
-import MyDocumentPicker from '@/components/MyDocumentPicker';
-import Upload from '@/components/Upload';
-import Touchable from '@/components/Touchable';
-import ImagePickerComponent from '@/components/MyImagePicker';
-import {scaleSizeH, scaleSizeW, setSpText, wp} from '@/utils/index';
-import MyGrid from '@/components/MyGrid';
+import MyDocumentPicker from '../../components/MyDocumentPicker';
+import Upload from '../../components/Upload';
+import Touchable from '../../components/Touchable';
+import ImagePickerComponent from '../../components/MyImagePicker';
+import {scaleSizeH, scaleSizeW, setSpText, wp} from '../../utils/index';
+import MyGrid from '../../components/MyGrid';
 import * as Yup from 'yup';
 import Data from '../../Data';
 import TreeData from '../../treeData';
@@ -33,7 +33,7 @@ import {
   MyTag,
   MyTreeSelect,
   ProgressBarDialog,
-} from '@/components/index';
+} from '../../components/index';
 
 class Demo extends Component {
   state = {

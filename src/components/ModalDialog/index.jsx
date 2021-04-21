@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Modal, Text, View, StyleSheet, } from 'react-native';
-import { viewportHeight, viewportWidth } from "@/utils/index";
-import Touchable from "@/components/Touchable";
+import { viewportHeight, viewportWidth } from "../../utils/index";
+import Touchable from "../../components/Touchable";
 /**
  * 模态对话框
  */

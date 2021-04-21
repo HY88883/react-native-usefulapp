@@ -1,7 +1,7 @@
 import { View, Text, ActivityIndicator } from "react-native";
 import { Overlay } from 'teaset';
 import React from "react";
-import { scaleSizeH, scaleSizeW } from "@/utils/index";
+import { scaleSizeH, scaleSizeW } from "../../utils/index";
 //加载loading界面
 let overlayKey = null;
 Overlay.removeLoading = () => {

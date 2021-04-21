@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {MyCheckbox, MyCollapsible} from '@/components/index';
+import {MyCheckbox, MyCollapsible} from '../../components/index';
 import {View, Text} from 'react-native';
 
 const SECTIONS = [

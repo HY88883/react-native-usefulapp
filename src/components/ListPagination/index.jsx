@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
-import { scaleSizeH, scaleSizeW, setSpText } from '@/utils/index';
+import { scaleSizeH, scaleSizeW, setSpText } from '../../utils/index';
 //列表分页
 class ListPagination extends PureComponent {
     constructor() {

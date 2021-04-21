@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, View, Text, } from 'react-native';
-import { scaleSizeW, setSpText } from '@/utils/index';
+import { scaleSizeW, setSpText } from '../../utils/index';
 //头像
 const Avatar = (props) => {
     const { type, uri, icon, text, avatarStyle, textStyle } = props;

@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Text, View, } from 'react-native';
-import { scaleSizeH, setSpText } from '@/utils/index';
+import { scaleSizeH, setSpText } from '../../utils/index';
 import { Picker } from '@ant-design/react-native';
-import Touchable from "@/components/Touchable";
+import Touchable from "../../components/Touchable";
 export const CustomChildren = (props) => {
     return <Touchable onPress={props.onPress}>
         <View style={{

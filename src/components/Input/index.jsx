@@ -12,7 +12,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 import React from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
 // import IconFont from "@/assets/iconfont";
-import { scaleSizeH, scaleSizeW, setSpText, wp } from "@/utils/index";
+import { scaleSizeH, scaleSizeW, setSpText, wp } from "../../utils/index";
 const IconFont = () => (<View></View>);
 /**
  * 文本输入框

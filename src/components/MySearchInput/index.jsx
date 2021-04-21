@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, } from 'react-native';
-import { scaleSizeH, scaleSizeW, setSpText } from '@/utils/index';
+import { scaleSizeH, scaleSizeW, setSpText } from '../../utils/index';
 import SearchInput from "./SearchInput/SearchInput";
 /**
  * 搜索输入框

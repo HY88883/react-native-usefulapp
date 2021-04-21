@@ -9,7 +9,7 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { scaleSizeH, scaleSizeW, setSpText, wp } from '@/utils/index';
+import { scaleSizeH, scaleSizeW, setSpText, wp } from '../../utils/index';
 import { StyleSheet, Text, View } from 'react-native';
 import { Grid } from '@ant-design/react-native';
 import React from 'react';

@@ -11,12 +11,12 @@ import { launchCamera, launchImageLibrary, } from 'react-native-image-picker';
 import { Toast } from '@ant-design/react-native';
 import React, { PureComponent } from 'react';
 import { Image, StyleSheet, View, Text, } from 'react-native';
-import { scaleSizeH, scaleSizeW, setSpText, wp } from '@/utils/index';
-import Touchable from '@/components/Touchable';
+import { scaleSizeH, scaleSizeW, setSpText, wp } from '../../utils/index';
+import Touchable from '../../components/Touchable';
 import { ActionSheet } from '@ant-design/react-native';
 import axios from 'axios';
-import { headersOptions, uploadUrl } from '@/components/Upload';
-import CircularProgress from '@/components/CircularProgress';
+import { headersOptions, uploadUrl } from '../../components/Upload';
+import CircularProgress from '../../components/CircularProgress';
 //imagePicker封装
 export const MyImagePicker = {
     launchCamera: (callback) => {

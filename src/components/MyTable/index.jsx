@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Row, Rows, Table } from 'react-native-table-component';
 import { StyleSheet } from "react-native";
-import { scaleSizeH, setSpText, wp } from "@/utils/index";
+import { scaleSizeH, setSpText, wp } from "../../utils/index";
 /**
  * 表格
  */

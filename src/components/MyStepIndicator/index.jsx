@@ -1,5 +1,5 @@
 import React from 'react';
-import { scaleSizeW, setSpText } from '@/utils/index';
+import { scaleSizeW, setSpText } from '../../utils/index';
 import StepIndicator from 'react-native-step-indicator';
 /**
  * 步骤条

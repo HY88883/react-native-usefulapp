@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Animated, Easing } from 'react-native';
-import { scaleSizeH } from "@/utils/index";
+import { scaleSizeH } from "../../utils/index";
 class Bar extends Component {
     constructor() {
         super(...arguments);

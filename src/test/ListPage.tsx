@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import {ListPagination} from "@/components/index";
+import {ListPagination} from "../../components/index";
 import {View,Text} from "react-native";
-import {scaleSizeH} from "@/utils/index";
+import {scaleSizeH} from "../../utils/index";
 
 export default class ListPage extends Component {
 

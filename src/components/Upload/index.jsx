@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import React, { PureComponent } from 'react';
 import { Image, StyleSheet, View, Text, Platform } from "react-native";
-import { scaleSizeH, scaleSizeW, setSpText } from "@/utils/index";
-import Touchable from "@/components/Touchable";
-import MyDocumentPicker from "@/components/MyDocumentPicker";
+import { scaleSizeH, scaleSizeW, setSpText } from "../../utils/index";
+import Touchable from "../../components/Touchable";
+import MyDocumentPicker from "../../components/MyDocumentPicker";
 import axios from "axios";
-import CircularProgress from "@/components/CircularProgress";
+import CircularProgress from "../../components/CircularProgress";
 import { Toast } from "@ant-design/react-native";
 import RNFS from 'react-native-fs';
 // @ts-ignore

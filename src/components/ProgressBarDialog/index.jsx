@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, Modal, Text, Dimensions, TouchableOpacity } from 'react-native';
 import Bar from './Bar';
-import { scaleSizeH, scaleSizeW, setSpText } from "@/utils/index";
+import { scaleSizeH, scaleSizeW, setSpText } from "../../utils/index";
 const { width } = Dimensions.get('window');
 //条形进度条
 class ProgressBarDialog extends PureComponent {

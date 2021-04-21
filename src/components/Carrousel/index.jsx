@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import SnapCarousel, { Pagination, ParallaxImage, } from 'react-native-snap-carousel';
-import { scaleSizeH, scaleSizeW, viewportWidth } from '@/utils/index';
+import { scaleSizeH, scaleSizeW, viewportWidth } from '../../utils/index';
 import { StyleSheet, View } from 'react-native';
 const sliderWidth = viewportWidth;
 const itemWidth = scaleSizeW(351);

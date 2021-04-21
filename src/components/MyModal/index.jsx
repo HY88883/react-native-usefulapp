@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from "@ant-design/react-native";
 import { Text } from 'react-native';
-import { scaleSizeH, setSpText } from "@/utils/index";
+import { scaleSizeH, setSpText } from "../../utils/index";
 /**
  * 对话框
  */

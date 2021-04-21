@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform, StyleSheet, View, } from 'react-native';
 import { Popover } from 'teaset';
-import { scaleSizeW } from '@/utils/index';
+import { scaleSizeW } from '../../utils/index';
 const MyPopover = (props) => {
     const { blackStyle, children, arrow } = props;
     return (<Popover style={[styles.blackStyle, styles.shadowStyle, blackStyle]} arrow={arrow}>

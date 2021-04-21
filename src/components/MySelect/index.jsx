@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { scaleSizeW, setSpText } from "@/utils/index";
+import { scaleSizeW, setSpText } from "../../utils/index";
 import { Select } from 'teaset';
 /**
  * 选择框

@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Image, StyleSheet, Text, } from 'react-native';
-import { scaleSizeW, setSpText } from '@/utils/index';
-import Touchable from '@/components/Touchable';
-import Func from '@/utils/Func';
+import { scaleSizeW, setSpText } from '../../utils/index';
+import Touchable from '../../components/Touchable';
+import Func from '../../utils/Func';
 const checkedStyle = {
     backgroundColor: 'rgb(16, 142, 233)',
     borderColor: 'rgb(16, 142, 233)',

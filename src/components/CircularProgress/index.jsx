@@ -1,7 +1,7 @@
 import React from 'react';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { Easing, Modal, StyleSheet, Text, View } from "react-native";
-import { setSpText } from "@/utils/index";
+import { setSpText } from "../../utils/index";
 /**
  * 环形进度条
  * @param props
