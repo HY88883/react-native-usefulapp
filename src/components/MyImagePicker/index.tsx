@@ -15,65 +15,21 @@ import {
 } from 'react-native';
 import {scaleSizeH, scaleSizeW, setSpText, wp} from '../../utils/index';
 import Touchable from '../../components/Touchable';
-import { ActionSheet, Button } from '@ant-design/react-native';
+import { ActionSheet,ActionPopover } from 'teaset';
 import axios from 'axios';
 import {headersOptions, Idata, uploadUrl} from '../../components/Upload';
 import CircularProgress from '../../components/CircularProgress';
 
-//imagePicker封装
-export const MyImagePicker = {
-  launchCamera: (callback: Callback) => {
-    launchCamera(
-      {
-        mediaType: 'photo',
-        maxHeight: 500,
-        maxWidth: 500,
-        quality: 1.0,
-        includeBase64: false,
-        saveToPhotos: true,
-        cameraType: 'back',
-      },
-      async response => {
-        if (response.didCancel) {
-        } else if (response.errorCode) {
-          Toast.fail('操作失败', 1);
-          return;
-        } else {
-          callback(response);
-        }
-      },
-    );
-  },
-  launchImageLibrary: (callback: Callback) => {
-    launchImageLibrary(
-      {
-        mediaType: 'photo',
-        maxHeight: 500,
-        maxWidth: 500,
-        quality: 1.0,
-        includeBase64: false,
-      },
-      async response => {
-        if (response.didCancel) {
-        } else if (response.errorCode) {
-          Toast.fail('操作失败', 1);
-          return;
-        } else {
-          callback(response);
-        }
-      },
-    );
-  },
-};
 
 interface IImagePickerComponent {
-  callback?: Callback;
-  pickerView?: StyleProp<ViewProps>;
+  pickerContainerView?: StyleProp<ViewProps>;
   type?: 'photo' | 'shoot';
-  shootView?: StyleProp<ViewProps>;
+  shootContainerView?: StyleProp<ViewProps>;
   callback?: (value: Idata) => void;
   layout?: 'column' | 'row';
   maxCount?: number;
+  headers?:{[key:string]:any};
+  remove?:boolean;
 }
 
 interface IImagePickerState {
@@ -91,11 +47,7 @@ class ImagePickerComponent extends PureComponent<
   IImagePickerState
 > {
   static defaultProps = {
-    callback: () => {},
-    pickerView: {},
     type: 'photo',
-    shootView: {},
-    callback: () => {},
     layout: 'column',
     maxCount: 5,
   };
@@ -197,40 +149,46 @@ class ImagePickerComponent extends PureComponent<
 
   onPress = () => {
     let items = [
-      { onPress: this.launchCamera},
-      {onPress: this.launchImageLibrary},
+      {title: '拍摄', onPress: this.launchCamera},
+      {title: '从相册中选择', onPress: this.launchImageLibrary},
     ];
-    const BUTTONS = [
-      '拍摄',
-      '从相册中选择',
-      '取消',
-    ];
-    ActionSheet.showActionSheetWithOptions(
-        {
-          options: BUTTONS,
-          cancelButtonIndex: 2,
-        },
-        buttonIndex => {
-          if(buttonIndex===0||buttonIndex===1){
-            items[buttonIndex].onPress()
-          }
-        }
-    );
+    let cancelItem = {title: '取消'};
+    ActionSheet.show(items, cancelItem);
   };
 
   onShootPress = () => {
     this.launchCamera();
   };
 
+  handleOperation = (ref,index) => {
+    const {remove}=this.props
+if(remove){
+  ref.measureInWindow((x, y, width, height) => {
+    let items = [
+      {title: '删除', onPress: ()=>this.handleDeleteFile(index)}
+    ]
+    ActionPopover.show({x, y, width, height}, items);
+  });
+}
+  };
+
+  //删除
+  handleDeleteFile=index=>{
+    let {ImageList}=this.state;
+    ImageList.splice(index,1)
+    console.log('ImageList'+JSON.stringify(ImageList))
+    this.setState({ImageList:[...ImageList]})
+  }
+
   get photo() {
     const {fill, visible, ImageList, content} = this.state;
-    const {pickerView, layout} = this.props;
+    const {pickerContainerView} = this.props;
     return (
-      <Touchable style={[styles.pickerView, pickerView]} onPress={this.onPress}>
+      <Touchable style={[styles.pickerContainerView, pickerContainerView]} onPress={this.onPress}>
         <CircularProgress visible={visible} fill={fill} content={content} />
         {ImageList.length === 0 ? (
           <View>
-            <Image source={require('./add.png')} style={styles.imageStyle} />
+            <Image source={require('./assets/add.png')} style={styles.imageStyle} />
             <Text style={styles.text}>上传</Text>
           </View>
         ) : (
@@ -245,21 +203,23 @@ class ImagePickerComponent extends PureComponent<
 
   get shoot() {
     const {fill, visible, ImageList, content} = this.state;
-    console.log(JSON.stringify(ImageList));
-    const {shootView, layout, maxCount} = this.props;
+    const {shootContainerView, layout, maxCount,remove} = this.props;
     return (
-      <View style={shootView}>
+      <View style={shootContainerView}>
         <CircularProgress visible={visible} fill={fill} content={content} />
         {ImageList.length < maxCount && (
           <Touchable onPress={this.onShootPress}>
-            <Image source={require('./shoot.png')} style={styles.shootImage} />
+            <Image source={require('./assets/shoot.png')} style={styles.shootImage} />
           </Touchable>
         )}
         {layout === 'column' ? (
           <View>
             {ImageList.length > 0 &&
               ImageList.map((item, index) => (
-                <Touchable key={item.attachId}>
+                <Touchable key={item.attachId}
+                           onPress={()=>this.handleOperation(this.['uploadRef'+item.attachId],index)}
+                           ref={(ref) => (this.['uploadRef'+item.attachId] = ref)}
+                >
                   <Image
                     source={{uri: item.link}}
                     style={styles.shootColumnImageStyle}
@@ -268,10 +228,13 @@ class ImagePickerComponent extends PureComponent<
               ))}
           </View>
         ) : (
-          <View style={styles.shootViewContainer}>
+          <View style={styles.shootContainerViewContainer}>
             {ImageList.length > 0 &&
               ImageList.map((item, index) => (
-                <Touchable key={item.attachId}>
+                <Touchable key={item.attachId}
+                           onPress={()=>this.handleOperation(this.['uploadRef'+item.attachId],index)}
+                           ref={(ref) => (this.['uploadRef'+item.attachId] = ref)}
+                >
                   <Image
                     source={{uri: item.link}}
                     style={styles.shootImageStyle}
@@ -285,7 +248,7 @@ class ImagePickerComponent extends PureComponent<
   }
 
   render() {
-    const {type, pickerView} = this.props;
+    const {type, pickerContainerView} = this.props;
     switch (type) {
       case 'photo':
         return this.photo;
@@ -296,7 +259,7 @@ class ImagePickerComponent extends PureComponent<
 }
 
 const styles = StyleSheet.create({
-  pickerView: {
+  pickerContainerView: {
     width: scaleSizeW(150),
     height: scaleSizeW(150),
     borderRadius: scaleSizeW(12),
@@ -305,6 +268,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
+    alignSelf: 'center',
+    overflow: 'hidden'
   },
   text: {
     fontSize: setSpText(16),
@@ -326,7 +291,7 @@ const styles = StyleSheet.create({
     borderRadius: scaleSizeW(12),
     margin: scaleSizeW(4),
   },
-  shootViewContainer: {
+  shootContainerViewContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     flexWrap: 'wrap',
@@ -336,6 +301,7 @@ const styles = StyleSheet.create({
     height: scaleSizeH(200),
     alignSelf: 'center',
     margin: scaleSizeW(4),
+    borderRadius:scaleSizeW(12)
   },
   photoImageStyle: {
     width: scaleSizeW(150),
@@ -345,3 +311,50 @@ const styles = StyleSheet.create({
 });
 
 export default ImagePickerComponent;
+
+
+//imagePicker封装
+export const MyImagePicker = {
+  launchCamera: (callback: Callback) => {
+    launchCamera(
+        {
+          mediaType: 'photo',
+          maxHeight: 500,
+          maxWidth: 500,
+          quality: 1.0,
+          includeBase64: false,
+          saveToPhotos: true,
+          cameraType: 'back',
+        },
+        async response => {
+          if (response.didCancel) {
+          } else if (response.errorCode) {
+            Toast.fail('操作失败', 1);
+            return;
+          } else {
+            callback(response);
+          }
+        },
+    );
+  },
+  launchImageLibrary: (callback: Callback) => {
+    launchImageLibrary(
+        {
+          mediaType: 'photo',
+          maxHeight: 500,
+          maxWidth: 500,
+          quality: 1.0,
+          includeBase64: false,
+        },
+        async response => {
+          if (response.didCancel) {
+          } else if (response.errorCode) {
+            Toast.fail('操作失败', 1);
+            return;
+          } else {
+            callback(response);
+          }
+        },
+    );
+  },
+};

@@ -14,12 +14,12 @@ import Func from '../../utils/Func';
 
 interface IMyTag {
   style?: StyleProp<ViewStyle>;
-  onClose?: () => void | undefined;
+  onClose?: () => void;
   closable?: boolean;
   imageStyle?: StyleProp<ImageStyle>;
   checkable?: boolean;
   text?: string;
-  textStyle: StyleProp<TextStyle>;
+  textStyle?: StyleProp<TextStyle>;
 }
 
 const checkedStyle = {
@@ -30,48 +30,55 @@ const checkedTextStyle = {
   color: '#fff',
 };
 
+interface IMyTagState{
+  containerStyle: StyleProp<ViewStyle>;
+  checkedTextStyle: StyleProp<TextStyle>;
+}
+
 /**
  * 标签
  */
-class MyTag extends PureComponent<IMyTag> {
+class MyTag extends PureComponent<IMyTag, IMyTagState> {
   static defaultProps = {
-    style: {},
-    onClose: undefined,
     closable: true,
-    imageStyle: {},
     Checkable: false,
-    text: '',
-    textStyle: {},
   };
 
   state = {
-    containerStyle: {},
-    checkedTextStyle: {},
+    containerStyle: null,
+    checkedTextStyle: null,
   };
 
   onPress = () => {
     const {onClose, checkable} = this.props;
     if (checkable) {
-      Func.isEmptyObject(this.state.containerStyle)
+      !(this.state.containerStyle)
         ? this.setState({
             containerStyle: checkedStyle,
             checkedTextStyle: checkedTextStyle,
           })
-        : this.setState({containerStyle: {}, checkedTextStyle: {}});
+        : this.setState({containerStyle: null, checkedTextStyle: null});
     }
     !!onClose && onClose();
   };
 
   render() {
     const {containerStyle, checkedTextStyle} = this.state;
-    const {style, closable, text, textStyle, imageStyle,checkable} = this.props;
+    const {
+      style,
+      closable,
+      text,
+      textStyle,
+      imageStyle,
+      checkable,
+    } = this.props;
     return (
       <Touchable
         style={[styles.style, style, containerStyle]}
         onPress={this.onPress}>
-        {!checkable&&closable && (
+        {!checkable && closable && (
           <Image
-            source={require('./deletex-icon.png')}
+            source={require('./assets/deletex-icon.png')}
             style={[styles.imageStyle, imageStyle]}
           />
         )}
@@ -90,6 +97,9 @@ const styles = StyleSheet.create({
     paddingVertical: scaleSizeW(4),
     paddingHorizontal: scaleSizeW(8),
     backgroundColor: '#fff',
+    justifyContent : "center",
+    alignItems:'center',
+    width: scaleSizeW(60)
   },
   imageStyle: {
     position: 'absolute',

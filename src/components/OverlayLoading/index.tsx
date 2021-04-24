@@ -4,14 +4,14 @@ import React from "react";
 import {scaleSizeH, scaleSizeW} from "../../utils/index";
 
 //加载loading界面
-let overlayKey=null
+let overlayKey:any=null
 Overlay.removeLoading=()=>{
     if(!overlayKey)return;
     Overlay.hide(overlayKey)
     overlayKey=null
 }
 
-Overlay.displayLoading=(content)=>{
+Overlay.displayLoading=(content?:string)=>{
     if(overlayKey){
         return
     }

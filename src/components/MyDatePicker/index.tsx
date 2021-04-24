@@ -1,18 +1,17 @@
-import React, { PureComponent } from 'react';
-import {DatePicker, List} from '@ant-design/react-native';
+import React, {Component, PureComponent} from 'react';
+import {DatePicker, List, Picker} from '@ant-design/react-native';
 import Func from "../../utils/Func";
+import {CustomChildren} from "../MyPicker/index";
 
 interface IMyDatePicker {
     mode?: 'datetime' | 'date' | 'year' | 'month' | 'time';
     // minDate?: Date;
     // maxDate?: Date;
-    onChange?: (value: Date) => void;
+    onChange?: (value: string) => void;
     defaultDate?: Date;
-    format?: string | ((value: Date) => string);
     extra?: string;
     minuteStep?: number;
     title?:React.ReactNode;
-    arrow?:'horizontal' | 'down' | 'up' | 'empty' | '';
 }
 
 interface IMyDatePickerState {
@@ -20,21 +19,18 @@ interface IMyDatePickerState {
 
 }
 
-export default MyDatePicker;
-
 /**
  * 日期选择器
  */
-class MyDatePicker extends PureComponent<IMyDatePicker,IMyDatePickerState> {
-
+class MyDatePicker extends Component<IMyDatePicker, IMyDatePickerState> {
     static defaultProps = {
         mode:"date",
         defaultDate:new Date(),
-        format:"YYYY-MM-DD",
         extra:'请选择',
         minuteStep:1,
-        arrow:'horizontal',
     }
+
+    format="YYYY-MM-DD"
 
     constructor(props:IMyDatePicker){
         super(props);
@@ -43,39 +39,41 @@ class MyDatePicker extends PureComponent<IMyDatePicker,IMyDatePickerState> {
         }
         const {mode}=props
         switch (mode) {
-            case 'datetime':props.format = "YYYY-MM-DD HH:mm:SS";break;
-            case 'year':props.format = "YYYY";break;
-            case 'month':props.format = "YYYY-MM";break;
-            case 'time':props.format = "HH:mm";break;
+            case 'datetime':this.format = "YYYY-MM-DD HH:mm:SS";break;
+            case 'year':this.format = "YYYY";break;
+            case 'month':this.format = "YYYY-MM";break;
+            case 'time':this.format = "HH:mm";break;
         }
     }
 
-
-
-    onChange=(value)=>{
-        const {format,onChange}=this.props
+    onChange=(value:Date)=>{
+        const {onChange}=this.props
         this.setState({value})
-        let dateStr=Func.dateFormat(format,value)
+        let dateStr:string=Func.dateFormat(this.format,value)
+        console.log('value'+value)
         !!onChange&&onChange(dateStr)
     }
 
     render() {
         const {value}=this.state;
-        const {mode,defaultDate,minuteStep,minDate,format,extra,maxDate,title,arrow}=this.props
+        const {mode,defaultDate,minuteStep,minDate,extra,maxDate,title}=this.props
         return (
-            <List>
                 <DatePicker
                     value={value}
                     mode={mode}
                     defaultDate={defaultDate}
                     onChange={this.onChange}
-                    format={format}
+                   /* onValueChange={(vals,index)=>{
+                        console.log(vals,index)
+                    }}*/
+                    format={this.format}
                     extra={extra}
                     minuteStep={minuteStep}
                 >
-                    <List.Item arrow={arrow}>{title}</List.Item>
+                    <CustomChildren>{title}</CustomChildren>
                 </DatePicker>
-            </List>
         );
     }
 }
+
+export default MyDatePicker;

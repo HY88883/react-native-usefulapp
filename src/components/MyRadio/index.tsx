@@ -5,12 +5,12 @@ import {StyleProp, TextStyle} from "react-native";
 const RadioItem = Radio.RadioItem;
 
 interface IMyRadioItem {
-    list:Array<Record<string | number | symbol, any>>;
+    list:Array<Record<string | number, any>>;
     style?:StyleProp<TextStyle>;
     onChange?: (checked: boolean,item:object,index:number) => void;
-    keyProp?:string|number| symbol;
-    titleProp?:string|number| symbol;
-    defaultIndex:number;
+    keyProp?:string|number;
+    titleProp?:string|number;
+    defaultIndex?:number;
 }
 
 interface IMyRadioItemState{
@@ -20,12 +20,10 @@ interface IMyRadioItemState{
 /**
  * 单选按钮
  */
-class MyRadio extends PureComponent<IMyRadioItem,IMyRadioItemState> {
+class MyRadio extends PureComponent<IMyRadioItem, IMyRadioItemState> {
     static defaultProps = {
         keyProp:'dictKey',
         titleProp:'dictValue',
-        style:{},
-        onChange:(params,item,index)=>{},
         defaultIndex:-1
     }
 
@@ -33,7 +31,7 @@ class MyRadio extends PureComponent<IMyRadioItem,IMyRadioItemState> {
       radioIndex:-1
   }
 
-  onChange =(checked,item,index)=>{
+  onChange =(checked: boolean, item: object, index: number)=>{
         const {onChange}=this.props
         if(checked){
             this.setState({radioIndex:index})
@@ -42,22 +40,22 @@ class MyRadio extends PureComponent<IMyRadioItem,IMyRadioItemState> {
   }
 
   render() {
-      const {list,style,onChange,keyProp,titleProp,defaultIndex}=this.props;
+      const {list,style,keyProp,titleProp,defaultIndex}=this.props;
       const {radioIndex}=this.state
     return (
         <List>
             {
                 Array.isArray(list)&&list.map((item,index)=>(
                     <RadioItem
-                        key={item[keyProp]||index}
+                        key={item[keyProp||'dictKey']||index}
                         defaultChecked={defaultIndex===index}
                         checked={radioIndex === index}
-                        onChange={(event)=>{
+                        onChange={(event: { target: { checked: boolean; }; })=>{
                             this.onChange(event.target.checked,item,index)
                         }}
                         style={style}
                     >
-                        {item[titleProp]}
+                        {item[titleProp||'dictValue']}
                     </RadioItem>
                 ))
             }

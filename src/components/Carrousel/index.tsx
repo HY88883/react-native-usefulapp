@@ -23,7 +23,7 @@ const sideHeight = scaleSizeH(100);
 /**
  * 轮播图
  */
-class Carrousel extends PureComponent<ICarrousel,ICarrouselState> {
+class Carrousel extends PureComponent<ICarrousel, ICarrouselState> {
     state = {
         activeSlide: 0,
     };

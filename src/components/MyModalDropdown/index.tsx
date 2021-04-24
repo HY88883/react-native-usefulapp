@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {FC, PureComponent} from 'react';
 import ModalDropdown from 'react-native-modal-dropdown';
 import {ActivityIndicator, StyleProp, StyleSheet, TextProps, ViewProps} from 'react-native';
 import {scaleSizeH, scaleSizeW, setSpText} from '../../utils/index';
@@ -15,7 +15,7 @@ interface ModalDropdownProps {
   dropdownTextHighlightStyle?: StyleProp<TextProps>;
   dropdownStyle?: StyleProp<ViewProps>;
   adjustFrame?: (frameValue: frame) => frame;
-  children?:React.ReactNode;
+  renderRow?: (option: any, index: string, isSelected: boolean) => React.ReactNode;
 }
 
 /**
@@ -23,7 +23,7 @@ interface ModalDropdownProps {
  * @param props
  * @constructor
  */
-const MyModalDropdown=(props:ModalDropdownProps):any=>{
+const MyModalDropdown:FC<ModalDropdownProps>=(props)=>{
   const {
     children,
     options,
@@ -32,11 +32,13 @@ const MyModalDropdown=(props:ModalDropdownProps):any=>{
     dropdownTextHighlightStyle,
     dropdownStyle,
     adjustFrame,
+    renderRow
   } = props;
   return (
       <ModalDropdown
           options={options}
           onSelect={onSelect}
+          renderRow={renderRow}
           dropdownTextStyle={[
             styles.dropdownTextStyle,
             dropdownTextStyle,
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
 })
 
 MyModalDropdown.defaultProps = {
-  adjustFrame: (obj:frame) => obj
+  adjustFrame: (obj: frame) => obj,
 }
 
 export default MyModalDropdown;

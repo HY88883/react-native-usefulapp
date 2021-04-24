@@ -1,4 +1,4 @@
-import React, {Component, PropTypes, PureComponent} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {
   View,
   Text,
@@ -40,7 +40,7 @@ class MyAlbumView extends PureComponent<IMyAlbumView, IMyAlbumViewState> {
   };
   private toastAnimated: Animated.Value;
 
-  constructor(props) {
+  constructor(props:any) {
     super(props);
     this.state = {
       innerIndex: 0,
@@ -60,26 +60,25 @@ class MyAlbumView extends PureComponent<IMyAlbumView, IMyAlbumViewState> {
     );
   };
 
-  onSave = (imageData, index) => {
+  onSave = (imageData:string[], index:number) => {
     DownloadImage(imageData[index])
-      .then(res => {
-        console.log(res);
-        if (res.statusCode == 200) {
-          this.setState({success: true}, () => {
-            this.toastTransition();
-          });
-        } else {
+        .then((res:any) => {
+          if (res.statusCode == 200) {
+            this.setState({success: true}, () => {
+              this.toastTransition();
+            });
+          } else {
+            this.setState({success: false}, () => {
+              this.toastTransition();
+            });
+          }
+        })
+        .catch(error => {
           this.setState({success: false}, () => {
             this.toastTransition();
           });
-        }
-      })
-      .catch(error => {
-        this.setState({success: false}, () => {
-          this.toastTransition();
+          console.log(error);
         });
-        console.log(error);
-      });
   };
 
   toastTransition = () => {
@@ -109,7 +108,7 @@ class MyAlbumView extends PureComponent<IMyAlbumView, IMyAlbumViewState> {
     return (
       <Modal
         visible={albumVisible}
-        animationType={'slide'}
+        animationType={'fade'}
         transparent={true}
         onRequestClose={this._Close}>
         {success ? (
@@ -138,8 +137,8 @@ class MyAlbumView extends PureComponent<IMyAlbumView, IMyAlbumViewState> {
           }}
           backgroundColor={'#666'}
           useNativeDriver
-          onChange={index => {
-            this.setState({innerIndex: index});
+          onChange={(index) => {
+            this.setState({innerIndex: index||0});
           }}
           onSave={() => this.onSave(imageData, innerIndex)}
         />
@@ -174,7 +173,7 @@ export default MyAlbumView;
  */
 export const DownloadImage = (uri: string) => {
   if (!uri) {
-    return null;
+    return Promise.reject();
   }
   return new Promise((resolve, reject) => {
     let timestamp = new Date().getTime(); //获取当前时间错
@@ -189,7 +188,7 @@ export const DownloadImage = (uri: string) => {
       fromUrl: formUrl,
       toFile: downloadDest,
       background: true,
-      begin: res => {
+      begin: (res:any) => {
         // console.log('begin', res);
         // console.log('contentLength:', res.contentLength / 1024 / 1024, 'M');
       },
@@ -197,7 +196,7 @@ export const DownloadImage = (uri: string) => {
     try {
       const ret = RNFS.downloadFile(options);
       ret.promise
-        .then(res => {
+        .then((res:any) => {
           // console.log('success', res);
           // console.log('file://' + downloadDest)
           var promise = CameraRoll.save(downloadDest);

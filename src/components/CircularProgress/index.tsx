@@ -1,4 +1,4 @@
-import React, {Component, PureComponent} from 'react';
+import React, {Component, FC, PureComponent} from 'react';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import {Easing, Modal, StyleSheet, Text, View} from "react-native";
 import {setSpText} from "../../utils/index";
@@ -14,12 +14,12 @@ interface ICircularProgress{
  * @param props
  * @constructor
  */
-const CircularProgress=(props:ICircularProgress)=>{
+const CircularProgress:FC<ICircularProgress>=(props)=>{
     const {fill,visible,content}=props
     return (
         <Modal
             hardwareAccelerated
-            animationType={'slide'}
+            animationType={'fade'}
             transparent={false}
             onRequestClose={()=>{}}
             visible={visible}>

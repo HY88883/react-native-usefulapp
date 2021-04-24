@@ -1,11 +1,11 @@
 import {setSpText} from '../../utils/index';
 import TreeSelect, {LeafClickProps, TreeItem} from 'react-native-tree-select';
-import React, {ReactElement} from 'react';
+import React, {FC, ReactElement} from 'react';
 import {StyleProp, StyleSheet, TextStyle} from 'react-native';
 
 interface IMyTreeSelect {
   data: TreeItem[];
-  onClick?: () => void;
+  onClick?: (item:any) => void;
   onClickLeaf?: (p: LeafClickProps) => void;
   isOpen?: boolean;
   itemStyle?: StyleProp<TextStyle>;
@@ -20,7 +20,7 @@ interface IMyTreeSelect {
  * @param props
  * @constructor
  */
-const MyTreeSelect = (props: IMyTreeSelect) => {
+const MyTreeSelect: FC<IMyTreeSelect> = (props) => {
   const {
     data,
     isOpen,
@@ -60,11 +60,7 @@ const styles = StyleSheet.create({
 });
 
 MyTreeSelect.defaultProps = {
-  onClick: () => {},
-  onClickLeaf: p => {},
   isOpen: false,
-  itemStyle: {},
-  selectedItemStyle: {},
   leafCanBeSelected: false,
   defaultSelectedId: [''],
   selectType: 'single',

@@ -1,4 +1,4 @@
-import React, {Component, PureComponent, ReactChildren} from 'react';
+import React, {Component, FC, PureComponent, ReactChildren} from 'react';
 import Collapsible from 'react-native-collapsible';
 import {StyleProp, Text, TouchableOpacity, View, ViewStyle} from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
@@ -41,7 +41,6 @@ interface IMyCollapsible<T> {
   expandMultiple?: boolean;
   sectionContainerStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
-  children?: React.ReactChild;
 }
 
 /**
@@ -49,7 +48,7 @@ interface IMyCollapsible<T> {
  * @param props
  * @constructor
  */
-const MyCollapsible = (props: IMyCollapsible<any>) => {
+const MyCollapsible:FC<IMyCollapsible<any>> = (props) => {
   const {
     type,
     collapsed,
@@ -82,7 +81,7 @@ const MyCollapsible = (props: IMyCollapsible<any>) => {
             {children}
           </Collapsible>
       )
-    case 'Accordion':
+    default:
       return (
         <Accordion
           sections={sections}
@@ -106,23 +105,15 @@ const MyCollapsible = (props: IMyCollapsible<any>) => {
   }
 };
 
-MyCollapsible.defalutProps = {
+MyCollapsible.defaultProps = {
   collapsed: false,
   align: 'top',
   collapsedHeight: 0,
-  style: {},
   sections: [],
   activeSections: [],
-  renderSectionTitle: undefined,
-  renderHeader: undefined,
-  renderContent: undefined,
-  renderFooter: undefined,
-  onChange: undefined,
   disabled: false,
   expandFromBottom: true,
   expandMultiple: false,
-  sectionContainerStyle: {},
-  containerStyle: {},
 };
 
 export default MyCollapsible;

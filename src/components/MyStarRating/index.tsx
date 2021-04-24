@@ -19,7 +19,7 @@ interface IMyStarRating {
 }
 
 interface IMyStarRatingState {
-  rating: number;
+  rating?: number;
 }
 
 /**
@@ -27,17 +27,12 @@ interface IMyStarRatingState {
  */
 class MyStarRating extends PureComponent<IMyStarRating, IMyStarRatingState> {
   static defaultProps = {
-    buttonStyle: {},
-    containerStyle: {},
-    disabled: false,
     emptyStar: require('./icons/starUnSelected.png'),
     emptyStarColor: 'gray',
     fullStar: require('./icons/starSelected.png'),
     halfStar: require('./icons/starUnSelected.png'),
-    halfStarColor: undefined,
     halfStarEnabled: true,
     maxStars: 5,
-    selectedStar: undefined,
     starSize: 40,
     fullStarColor: 'orange',
   };
@@ -46,7 +41,7 @@ class MyStarRating extends PureComponent<IMyStarRating, IMyStarRatingState> {
     rating: undefined,
   };
 
-  selectedStar = rating => {
+  selectedStar = (rating: number) => {
     this.setState({rating});
     const {selectedStar} = this.props;
     !!selectedStar && selectedStar(rating);

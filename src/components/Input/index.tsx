@@ -5,15 +5,12 @@ import {FieldInputProps, FormikProps} from 'formik';
 import {scaleSizeH, scaleSizeW, setSpText, wp} from "../../utils/index";
 
 interface IProps extends TextInputProps {
-    field?: FieldInputProps<any>;
-    form?: FormikProps<any>;
-    haveIcon?:boolean;
+    // field?: FieldInputProps<any>;
+    // form?: FormikProps<any>;
     container?:StyleProp<ViewProps>;
     inputStyle?:StyleProp<TextStyle> ;
-    icon?:React.ReactNode;
+    icon?:React.ReactElement;
 }
-
-const IconFont=()=>(<View></View>)
 
 /**
  * 文本输入框
@@ -21,11 +18,11 @@ const IconFont=()=>(<View></View>)
  * @constructor
  */
 const Input=(props:IProps)=>{
-    const {form, field, haveIcon,icon,container,inputStyle,...rest} = props;
+    const {form, field,icon,container,inputStyle,...rest} = props;
     return (
         <View style={[styles.container,container]}>
             {
-                haveIcon?<View style={{flexDirection:'row',alignItems:'center'}}>
+                icon?<View style={{flexDirection:'row',alignItems:'center'}}>
                     {icon}
                     <TextInput
                         style={[styles.input,inputStyle]}
@@ -52,10 +49,6 @@ const Input=(props:IProps)=>{
     )
 }
 
-Input.defaultProps={
-    haveIcon:false,
-}
-
 const styles = StyleSheet.create({
     container: {
       marginVertical: scaleSizeH(10),
@@ -63,7 +56,8 @@ const styles = StyleSheet.create({
     input: {
       height:scaleSizeH(40),
         padding:0,
-      paddingHorizontal: scaleSizeW(10),
+      paddingLeft: scaleSizeW(10),
+        paddingRight:scaleSizeW(40),
         width:wp(70),
         fontSize:setSpText(15),
     },

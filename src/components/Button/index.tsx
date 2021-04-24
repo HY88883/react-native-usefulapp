@@ -1,4 +1,4 @@
-import React, {PureComponent, ReactNode} from 'react';
+import React, {PureComponent, ReactNode, FC, ReactElement} from 'react';
 import {
   View,
   StyleSheet,
@@ -16,8 +16,8 @@ import Touchable from '../../components/Touchable';
 interface ButtonProps {
   buttonStyle?: StyleProp<ViewStyle>;
   type?: 'icon';
-  icon?: ReactNode;
-  text?: string;
+  icon?: ReactElement;
+  text: string;
   textStyle?: StyleProp<ViewStyle>;
   loading?: boolean;
   disabled?: boolean;
@@ -29,7 +29,7 @@ interface ButtonProps {
  * @param props
  * @constructor
  */
-const Button=(props:ButtonProps):any=>{
+const Button: FC<ButtonProps> = (props) => {
   const {
     icon,
     buttonStyle,
@@ -43,40 +43,34 @@ const Button=(props:ButtonProps):any=>{
   switch (type) {
     case 'icon':
       return (
-          <Touchable
-              style={[styles.buttonStyle, buttonStyle]}
-              disabled={disabled}
-              onPress={onPress}>
-            {icon}
-            {text ? (
-                <Text style={[styles.textStyle, textStyle]}>
-                  {text}
-                </Text>
-            ) : null}
-          </Touchable>
+        <Touchable
+          style={[styles.buttonStyle, buttonStyle]}
+          disabled={disabled}
+          onPress={onPress}>
+         <View style={styles.iconStyle}>
+           {icon}
+         </View>
+          <Text style={[styles.textStyle, textStyle]}>{text}</Text>
+        </Touchable>
       );
     default:
       return (
-          <Touchable
-              style={[styles.buttonStyle, buttonStyle]}
-              disabled={disabled}
-              onPress={onPress}>
-            {loading && (
-                <ActivityIndicator
-                    style={{width: scaleSizeW(20), height: scaleSizeW(20)}}
-                    animating={loading}
-                    color={'#fff'}
-                />
-            )}
-            {text ? (
-                <Text style={[styles.textStyle, textStyle]}>
-                  {text}
-                </Text>
-            ) : null}
-          </Touchable>
+        <Touchable
+          style={[styles.buttonStyle, buttonStyle]}
+          disabled={disabled}
+          onPress={onPress}>
+          {loading && (
+            <ActivityIndicator
+              style={styles.indicatorStyle}
+              animating={loading}
+              color={'#fff'}
+            />
+          )}
+          <Text style={[styles.textStyle, textStyle]}>{text}</Text>
+        </Touchable>
       );
   }
-}
+};
 
 const styles = StyleSheet.create({
   buttonStyle: {
@@ -85,12 +79,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius:scaleSizeW(4)
+    borderRadius: scaleSizeW(4),
+    width: scaleSizeW(100),
   },
   textStyle: {
     fontSize: setSpText(14),
     color: '#fff',
   },
-})
+  indicatorStyle: {
+    width: scaleSizeW(20),
+    height: scaleSizeW(20),
+    position: 'absolute',
+    left:scaleSizeW(10)
+  },
+  iconStyle:{
+    position: 'absolute',
+    left:scaleSizeW(10)
+  }
+});
 
 export default Button;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactChild, ReactNode} from 'react';
 import {
   Image,
   StyleSheet,
@@ -14,22 +14,31 @@ import {scaleSizeW, setSpText} from '../../utils/index';
 interface IAvatar {
   type?: 'image' | 'icon' | 'character';
   uri?: string;
-  icon?: React.ReactNode;
+  icon?: any;
   text?: string;
   textStyle?: StyleProp<TextStyle>;
-  avatarStyle?: StyleProp<any> ;
+  imageAvatarStyle?: StyleProp<ImageStyle>;
+  avatarStyle?: StyleProp<ViewStyle>;
 }
 
 //头像
-const Avatar = (props: IAvatar): any => {
-  const {type, uri, icon, text, avatarStyle, textStyle} = props;
+const Avatar: React.FC<IAvatar> = (props) => {
+  const {
+    type,
+    uri,
+    icon,
+    text,
+    avatarStyle,
+    textStyle,
+    imageAvatarStyle,
+  } = props;
   switch (type) {
     case 'image':
       return (
         <View style={{overflow: 'hidden'}}>
           <Image
             source={{uri}}
-            style={[styles.avatar, avatarStyle]}
+            style={[styles.avatar, imageAvatarStyle]}
             resizeMode={'cover'}
           />
         </View>

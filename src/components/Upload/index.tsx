@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, {Component, PureComponent} from 'react';
 import {Image, StyleSheet, View, Text, StyleProp, ViewProps, Platform} from "react-native";
 import {scaleSizeH, scaleSizeW, setSpText, viewportWidth} from "../../utils/index";
@@ -7,7 +8,6 @@ import axios from "axios";
 import CircularProgress from "../../components/CircularProgress";
 import {Toast} from "@ant-design/react-native";
 import RNFS from 'react-native-fs';
-// @ts-ignore
 import {ActionPopover,Menu} from 'teaset'
 import DocumentPicker from "react-native-document-picker";
 
@@ -65,11 +65,11 @@ export const headersOptions = {
     Authorization: 'Basic c3dvcmQ6c3dvcmRfc2VjcmV0',
     'Content-Type': 'multipart/form-data',
     'Blade-Auth':
-    'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpc3N1c2VyIiwiYXVkIjoiYXVkaWVuY2UiLCJ0ZW5hbnRfaWQiOiIwMDAwMDAiLCJyb2xlX25hbWUiOiJzdWJjb250cmFjdG9yIiwicG9zdF9pZCI6IjExMjM1OTg4MTc3Mzg2NzUyMDEiLCJ1c2VyX2lkIjoiMTEyMzU5ODgyMTczODY3NTIwNCIsInJvbGVfaWQiOiIxMzY0MTkyMDEzMTA0Njg5MTU0IiwidXNlcl9uYW1lIjoiYm9zcyIsIm5pY2tfbmFtZSI6IuiAgeadvyIsImRldGFpbCI6eyJ0eXBlIjoid2ViIn0sInRva2VuX3R5cGUiOiJhY2Nlc3NfdG9rZW4iLCJkZXB0X2lkIjoiMTM2NDA1MjQ2MzEzMjgxOTQ1OCIsImFjY291bnQiOiJib3NzIiwiY2xpZW50X2lkIjoic3dvcmQiLCJleHAiOjE2MTg2Njc2MzIsIm5iZiI6MTYxODU4MTIzMn0.uJLk2xQRkTaREPFMEHGGk1gNTzl2M2NfiN54APxT7yWQXdmtXf1z4YCorYuZLsUfceRUdAMuDQ2XRT6hfx6OJw'
+    'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpc3N1c2VyIiwiYXVkIjoiYXVkaWVuY2UiLCJ0ZW5hbnRfaWQiOiIwMDAwMDAiLCJyb2xlX25hbWUiOiJhZG1pbmlzdHJhdG9yIiwicG9zdF9pZCI6IjExMjM1OTg4MTc3Mzg2NzUyMDEiLCJ1c2VyX2lkIjoiMTEyMzU5ODgyMTczODY3NTIwMSIsInJvbGVfaWQiOiIxMTIzNTk4ODE2NzM4Njc1MjAxIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJuaWNrX25hbWUiOiLnrqHnkIblkZgiLCJkZXRhaWwiOnsidHlwZSI6IndlYiJ9LCJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZGVwdF9pZCI6IjEzNjQwNTI0NjMxMzI4MTk0NTgiLCJhY2NvdW50IjoiYWRtaW4iLCJjbGllbnRfaWQiOiJzd29yZCIsImV4cCI6MTYxOTI1NTMxNSwibmJmIjoxNjE5MTY4OTE1fQ.mVWH0aFroLb9rFhJMhuIvywxhJTcHX8BArPQwsS-i_TLOTaMY6VEp3JFDQOB9SE7br2vo423eoutAhevAYBDaA'
 };
 
 export const uploadUrl =
-    'http://li.yunlink.win:16995/api/blade-resource/oss/endpoint/put-file-attach';
+    'http://192.168.0.108:8879/api/blade-resource/oss/endpoint/put-file-attach';
 
 /**
  * 上传
@@ -145,15 +145,17 @@ class Upload extends PureComponent<IUpload, IUploadState> {
 
     handleOperation = (ref,item,index) => {
         // this.handleDownload(item)
-        ref.measureInWindow((x, y, width, height) => {
-            let items = [
-            ]
-            const {remove,download}=this.props
-            if(remove)items.push(                {title: '删除', onPress: ()=>this.handleDeleteFile(index)}
-            )
-            if(download)items.push( {title: '下载', onPress: ()=>this.handleDownload(item)})
-            ActionPopover.show({x, y, width, height}, items);
-        });
+        const {remove,download}=this.props
+if(remove||download){
+    ref.measureInWindow((x, y, width, height) => {
+        let items = [
+        ]
+        if(remove)items.push(                {title: '删除', onPress: ()=>this.handleDeleteFile(index)}
+        )
+        if(download)items.push( {title: '下载', onPress: ()=>this.handleDownload(item)})
+        ActionPopover.show({x, y, width, height}, items);
+    });
+}
     };
 
     //删除
@@ -164,7 +166,7 @@ class Upload extends PureComponent<IUpload, IUploadState> {
     }
 
     //下载
-    handleDownload=async (item)=>{
+    handleDownload=async (item:any)=>{
         // `${Config.FILE_URL}${item.name}`
         const defaultPath =
             Platform.OS === 'ios'
@@ -198,7 +200,8 @@ class Upload extends PureComponent<IUpload, IUploadState> {
             },500)
             console.log('下载成功,文件已下载至'+'file://' + downloadDest)
         }).catch((err) => {
-            console.log('err'+err.toString());
+            console.log('err==='+err.toString());
+                this.setState({visible:false})
             Toast.fail('下载失败',1);
         });
     }
@@ -211,7 +214,7 @@ class Upload extends PureComponent<IUpload, IUploadState> {
                 <CircularProgress visible={visible} fill={fill} content={content}/>
                 {
                     fileList.length<maxCount&&   <Touchable style={styles.uploadView} onPress={()=>{this.onPress('file')}} >
-                        <Image source={require('./upload.png')} style={{width :scaleSizeW(24),height:scaleSizeW(24)}}/>
+                        <Image source={require('./assets/upload.png')} style={{width :scaleSizeW(24),height:scaleSizeW(24)}}/>
                         <Text style={styles.text}>上传附件</Text>
                     </Touchable>
                 }
@@ -233,7 +236,6 @@ class Upload extends PureComponent<IUpload, IUploadState> {
     get pictureCard(){
         const {fill,visible,fileList,content}=this.state
         const {uploadContainer,listType,maxCount,pictureCardView}=this.props
-        console.log(fileList)
         return (
             <View style={[styles.pictureCardView,pictureCardView]}>
                 <CircularProgress visible={visible} fill={fill} content={content}/>
@@ -251,7 +253,7 @@ class Upload extends PureComponent<IUpload, IUploadState> {
                     })
                 }
                 {fileList.length<maxCount&& <Touchable style={styles.pickerView} onPress={()=>{this.onPress('picture-card')}} >
-                    <Image source={require('./upload.png')} style={{width :scaleSizeW(24),height:scaleSizeW(24)}}/>
+                    <Image source={require('./assets/upload.png')} style={{width :scaleSizeW(24),height:scaleSizeW(24)}}/>
                     <Text style={styles.text}>上传图片</Text>
                 </Touchable>}
             </View>

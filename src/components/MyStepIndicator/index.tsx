@@ -1,4 +1,4 @@
-import React, {Component, PureComponent} from 'react';
+import React, {Component, FC, PureComponent} from 'react';
 import {
     Alert,
     Image,
@@ -33,8 +33,16 @@ interface IMyStepIndicator {
     currentPosition?:number;
     direction?:'horizontal'|'vertical';
     onPress?:(index:number)=>void;
-    renderStepIndicator?:({position:number,stepStatus:string})=>React.ReactNode;
-    renderLabel?:({position:number,stepStatus:string,label:string,currentPosition:number})=>React.ReactNode;
+    renderStepIndicator?(args: {
+        position: number;
+        stepStatus: string;
+    }): React.ReactNode;
+    renderLabel?(args: {
+        position: number;
+        stepStatus: string;
+        label: string;
+        currentPosition: number;
+    }): React.ReactNode;
 }
 
 /**
@@ -42,7 +50,7 @@ interface IMyStepIndicator {
  * @param props
  * @constructor
  */
-const MyStepIndicator=(props:IMyStepIndicator)=>{
+const MyStepIndicator:FC<IMyStepIndicator>=(props)=>{
     const {customStyles,stepCount,renderStepIndicator,onPress,labels,direction,currentPosition,renderLabel}=props
     return (
         <StepIndicator
@@ -84,9 +92,6 @@ MyStepIndicator.defaultProps = {
     },
     currentPosition:0,
     direction:'horizontal',
-    onPress:null,
-    renderStepIndicator:null,
-    renderLabel:null,
 }
 
 export default MyStepIndicator;

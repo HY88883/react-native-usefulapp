@@ -38,16 +38,17 @@ export default class SearchInput extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.editing !== this.state.editing) {
       LayoutAnimation.configureNext({
-        duration: 500,
+        duration: 700,
         create: {
           duration: 300,
-          type: LayoutAnimation.Types.easeInEaseOut,
+          type: LayoutAnimation.Types.linear,
           property: LayoutAnimation.Properties.opacity,
         },
         update: {
           type: LayoutAnimation.Types.spring,
-          springDamping: 200,
-        }
+          springDamping: 0.4,
+        },
+        delete: { type: 'linear', property: 'opacity' }
       });
     }
   }
@@ -94,7 +95,6 @@ export default class SearchInput extends Component {
 
   render() {
     let {style, children, inputStyle, iconSize, disabled, value, placeholder, placeholderTextColor, selectionColor, pointerEvents, onBlur, onFocus, onChangeText, ...others} = this.props;
-
     style = [{
       backgroundColor: Theme.siColor,
       borderColor: Theme.siBorderColor,

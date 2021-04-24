@@ -6,7 +6,6 @@ interface IMySlider {
   minimumTrackTintColor?: string;
   onChange?: (value?: number) => void;
   defaultValue?: number;
-  tipFormatter?: (value?: string) => React.ReactNode;
   value?: number;
   min?: number;
   max?: number;
@@ -14,24 +13,26 @@ interface IMySlider {
   disabled?: boolean;
 }
 
+interface IMySliderState{
+  value:number;
+}
+
 //滑动输入条
-class MySlider extends PureComponent<IMySlider> {
+class MySlider extends PureComponent<IMySlider,IMySliderState> {
   static defaultProps = {
     maximumTrackTintColor: 'blue',
     minimumTrackTintColor: 'red',
-    onChange: undefined,
     defaultValue: 0,
     min: 0,
     max: 1,
     step: 0.1,
-    disabled: false,
   };
 
   state = {
     value: 0,
   };
 
-  onChange = value => {
+  onChange = (value?: number) => {
     this.setState({value});
     const {onChange}=this.props;
     !!onChange&&onChange(value)

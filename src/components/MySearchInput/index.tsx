@@ -30,12 +30,8 @@ class MySearchInput extends PureComponent<IMySearchInput,IMySearchInputState> {
   static defaultProps = {
       disabled:false,
       iconSize:15,
-      value:'',
-      defaultValue:'',
       placeholder:'请输入' ,
       placeholderTextColor:'#999',
-      onChangeText:undefined,
-      onSubmitEditing:undefined,
       multiline:false
   }
 

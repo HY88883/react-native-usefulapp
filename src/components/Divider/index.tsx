@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {FC, PureComponent} from 'react';
 import {View, StyleSheet, ColorValue, StyleProp, ViewProps} from 'react-native';
 
 interface IDivider{
@@ -13,7 +13,7 @@ interface IDivider{
  * @param props
  * @constructor
  */
-const Divider=(props:IDivider):any=>{
+const Divider: FC<IDivider> = (props) => {
     let {lineHeight, color, style,type} = props;
     switch (type) {
         case 'vertical':return (

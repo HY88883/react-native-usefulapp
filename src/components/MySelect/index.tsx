@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import {StyleSheet} from "react-native";
 import {scaleSizeW, setSpText} from "../../utils/index";
 import {Select} from 'teaset'
@@ -19,7 +19,7 @@ interface IMySelect {
  * @param props
  * @constructor
  */
-const MySelect=(props:IMySelect)=>{
+const MySelect:FC<IMySelect>=(props)=>{
     const {value,items,getItemValue,getItemText,placeholder,pickerTitle,onSelected,pickerType}=props;
 
     return <Select

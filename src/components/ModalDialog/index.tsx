@@ -20,24 +20,21 @@ interface IModalDialog{
 }
 
 /**
- * 模态对话框
+ * 模态提示框
  */
  class ModalDialog extends PureComponent<IModalDialog> {
 
     static defaultProps = {
         _dialogTitle: '温馨提示',
-        _dialogContent: null,
         _dialogLeftBtnTitle: '取消',
         _dialogRightBtnTitle: '确定',
-        _dialogVisible: false,
-        _dialogLeftBtnAction:()=>{},
-        _dialogRightBtnAction:()=>{}
     }
 
     render() {
         // onPress事件直接与父组件传递进来的属性挂接
         return (
             <Modal
+                animationType={'fade'}
                 visible={this.props._dialogVisible}
                 transparent={true}
                 onRequestClose={() => {}} //如果是Android设备 必须有此方法
