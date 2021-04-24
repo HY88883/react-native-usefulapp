@@ -1,6 +1,6 @@
 {
   "name": "react-native-usefulapp",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "在rn第三方组件库基础之上再次封装的一些组件集，供日常开发使用，大大提高开发效率",
   "author": {
     "name": "huyong",
@@ -45,5 +45,6 @@
   "devDependencies": {
     "react-native-typescript-transformer": "^1.2.13",
     "typescript": "^4.2.4"
-  }
+  },
+  "dependencies": {}
 }

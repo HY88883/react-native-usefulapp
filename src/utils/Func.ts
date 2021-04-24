@@ -1,4 +1,5 @@
 import {Platform,NativeModules} from "react-native";
+import {Toast} from "@ant-design/react-native";
 
 /**
  * 通用工具类
@@ -57,8 +58,12 @@ export default class Func {
     return false;
   }
 
+  /**
+   * 判断数据是否为空
+   * @param val
+   */
   static isEmptyObject(val: object) {
-    if (val === null || typeof val === 'undefined') {
+    if (!val&& val !==0 &&typeof val !== 'boolean') {
       return true;
     }
     if (typeof val === 'object') {
@@ -66,9 +71,8 @@ export default class Func {
       if (arr.length === 0) {
         return true;
       }
-      return false;
     }
-    return true;
+    return false;
   }
 
   /**
@@ -726,6 +730,29 @@ export default class Func {
       }
     }
   }
+
+  /**
+   * 表单验证函数（校验数据是否为空）
+   * @param values
+   * @param rest
+   */
+  static validateResult (values:{[key:string]:any},...rest: (string | number)[]) {
+    let resultList={...values}
+    for(let i=0;i<rest.length;i++){
+      if(rest[i] in resultList){
+        delete resultList[rest[i]]
+      }
+    }
+    console.log(rest, resultList);
+    for(let key in resultList){
+      if(Func.isEmptyObject(resultList[key])){
+        Toast.fail(`请填写${key}`,1)
+        return false
+      }
+    }
+    return true
+  }
+
 
   /**
    * 检查app更新
