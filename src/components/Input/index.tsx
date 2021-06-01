@@ -32,6 +32,7 @@ const Input:FC<IProps>=(props)=>{
                     <TextInput
                         style={[styles.input,inputStyle]}
                         underlineColorAndroid='transparent'
+                        placeholderTextColor={'#999'}
                         {...rest}
                         onChangeText={form.handleChange(field.name)}
                         onBlur={form.handleBlur(field.name)}
@@ -40,6 +41,7 @@ const Input:FC<IProps>=(props)=>{
                 </View>:<TextInput
                     style={[styles.input,inputStyle]}
                     underlineColorAndroid='transparent'
+                    placeholderTextColor={'#999'}
                     {...rest}
                     onChangeText={form.handleChange(field.name)}
                     onBlur={form.handleBlur(field.name)}

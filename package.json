@@ -1,6 +1,6 @@
 {
   "name": "react-native-usefulapp",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "在rn第三方组件库基础之上再次封装的一些组件集，供日常开发使用，大大提高开发效率",
   "author": {
     "name": "huyong",
@@ -60,6 +60,8 @@
     "react-native-step-indicator": "^1.0.3",
     "react-native-table-component": "^1.2.1",
     "react-native-tree-select": "^2.0.9",
-
+    "@react-native-community/async-storage": "^1.12.0",
+    "@react-native-community/segmented-control": "^2.2.2",
+    "@react-native-community/slider": "^3.0.3"
   }
 }
