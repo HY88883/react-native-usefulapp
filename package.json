@@ -1,6 +1,6 @@
 {
   "name": "react-native-usefulapp",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "在rn第三方组件库基础之上再次封装的一些组件集，供日常开发使用，大大提高开发效率",
   "author": {
     "name": "huyong",
@@ -9,8 +9,8 @@
   },
   "private": false,
   "license": "MIT",
-  "main": "dist/components/index.ts",
-  "module": "dist/components/index.ts",
+  "main": "dist/components/index.js",
+  "module": "dist/components/index.js",
   "typings": "dist/components/index.d.ts",
   "keywords": [
     "react native",
