@@ -9,6 +9,7 @@ import {
   Image,
   GestureResponderEvent,
   ActivityIndicator,
+  TextStyle
 } from 'react-native';
 import {scaleSizeH, scaleSizeW, setSpText} from '../../utils/index';
 import Touchable from '../../components/Touchable';
@@ -18,7 +19,7 @@ interface ButtonProps {
   type?: 'icon';
   icon?: ReactElement;
   text: string;
-  textStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
   loading?: boolean;
   disabled?: boolean;
   onPress?: (event: GestureResponderEvent) => void;

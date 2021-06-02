@@ -5,11 +5,12 @@ import SnapCarousel, {
     ParallaxImage,
 } from 'react-native-snap-carousel';
 import { scaleSizeH, scaleSizeW, setSpText, viewportWidth } from '../../utils/index';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View,StyleProp,ViewStyle } from 'react-native';
 
 interface ICarrousel {
     data:ReadonlyArray<any>;
     dotsLength:number;
+    imageContainer?:StyleProp<ViewStyle>;
 }
 
 interface ICarrouselState {
@@ -36,11 +37,12 @@ class Carrousel extends PureComponent<ICarrousel, ICarrouselState> {
         { item }: { item: string },
         parallaxProps?: AdditionalParallaxProps,
     ) => {
+        const {imageContainer}=this.props;
         return (
             <ParallaxImage
                 source={{ uri: item }}
                 style={styles.image}
-                containerStyle={styles.imageContainer}
+                containerStyle={[styles.imageContainer,imageContainer]}
                 {...parallaxProps}
             />
         );
