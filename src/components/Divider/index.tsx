@@ -4,7 +4,7 @@ import {View, StyleSheet, ColorValue, StyleProp, ViewProps} from 'react-native';
 interface IDivider{
     lineHeight?: number;
     color?: ColorValue;
-    style?: StyleProp<ViewProps>;
+    style?: any;
     type?:'horizontal'|'vertical';
 }
 

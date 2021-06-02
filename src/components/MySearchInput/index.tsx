@@ -1,11 +1,11 @@
 import React, {PureComponent} from 'react';
-import {NativeSyntheticEvent, StyleProp, StyleSheet, TextInputSubmitEditingEventData, ViewProps,} from 'react-native';
+import {NativeSyntheticEvent, StyleProp, StyleSheet, TextInputSubmitEditingEventData, ViewStyle,TextStyle} from 'react-native';
 import {scaleSizeH, scaleSizeW, setSpText} from '../../utils/index';
 import SearchInput from "./SearchInput/SearchInput";
 
 interface IMySearchInput {
-  style?: StyleProp<ViewProps>;
-  inputStyle?: StyleProp<ViewProps>;
+  style?: StyleProp<ViewStyle>;
+  inputStyle?: StyleProp<TextStyle>;
   disabled?: boolean;
   iconSize?: number;
   defaultValue?: string;
