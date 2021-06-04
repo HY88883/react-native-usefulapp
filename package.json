@@ -1,6 +1,6 @@
 {
   "name": "react-native-usefulapp",
-  "version": "1.1.5",
+  "version": "1.1.9",
   "description": "在rn第三方组件库基础之上再次封装的一些组件集，供日常开发使用，大大提高开发效率",
   "author": {
     "name": "huyong",

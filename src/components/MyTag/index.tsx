@@ -41,7 +41,7 @@ interface IMyTagState{
 class MyTag extends PureComponent<IMyTag, IMyTagState> {
   static defaultProps = {
     closable: true,
-    Checkable: false,
+    checkable: false,
   };
 
   state = {
@@ -50,7 +50,7 @@ class MyTag extends PureComponent<IMyTag, IMyTagState> {
   };
 
   onPress = () => {
-    const {onClose, checkable} = this.props;
+    const {onClose, checkable,closable} = this.props;
     if (checkable) {
       !(this.state.containerStyle)
         ? this.setState({
@@ -59,7 +59,7 @@ class MyTag extends PureComponent<IMyTag, IMyTagState> {
           })
         : this.setState({containerStyle: null, checkedTextStyle: null});
     }
-    !!onClose && onClose();
+    if(closable)!!onClose && onClose();
   };
 
   render() {
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent : "center",
     alignItems:'center',
-    width: scaleSizeW(60)
+    // width: scaleSizeW(60)
   },
   imageStyle: {
     position: 'absolute',

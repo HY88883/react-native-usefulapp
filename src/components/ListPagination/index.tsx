@@ -21,6 +21,7 @@ interface IListPagination {
   pageParams?: IPageParams;
   renderItem: ListRenderItem<any> | null | undefined;
   keyExtractor?: (item: any, index: number) => string;
+    onRef?:(ref:any)=>void;
 }
 
 interface IListPaginationState {
@@ -42,11 +43,17 @@ class ListPagination extends PureComponent<
     keyExtractor: (item: any, index: any) => index,
   };
 
-  state = {
-    isFirstLoading: false,
-    isFetchLoading: false,
-    list: [],
-  };
+  constructor(props:IListPagination){
+      super(props)
+      this.state = {
+          isFirstLoading: false,
+          isFetchLoading: false,
+          list: [],
+      };
+     if(props.onRef){
+         props.onRef(this)
+     }
+  }
 
   pagination = {
     total: 0,
