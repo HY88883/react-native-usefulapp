@@ -32,7 +32,8 @@ const MyModalDropdown:FC<ModalDropdownProps>=(props)=>{
     dropdownTextHighlightStyle,
     dropdownStyle,
     adjustFrame,
-    renderRow
+    renderRow,
+      ...rest
   } = props;
   return (
       <ModalDropdown
@@ -53,6 +54,7 @@ const MyModalDropdown:FC<ModalDropdownProps>=(props)=>{
           adjustFrame={adjustFrame}
           renderSeparator={()=><Divider/>}
           showsVerticalScrollIndicator
+          {...rest}
       >
         {children}
       </ModalDropdown>
@@ -64,7 +66,8 @@ const styles = StyleSheet.create({
     fontSize: setSpText(13),
     lineHeight: scaleSizeH(20),
     textAlign: 'center',
-    color: '#333'
+    color: '#333',
+    padding:scaleSizeW(2)
   },
   dropdownTextHighlightStyle: {
     lineHeight: scaleSizeH(20),
@@ -72,13 +75,14 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: setSpText(15),
     backgroundColor: '#1890ff',
+    padding:scaleSizeW(2)
   },
   dropdownStyle: {
     flex: 1,
     borderRadius: scaleSizeW(4),
-    borderWidth: 1,
+    borderWidth: StyleSheet.hairlineWidth,
     borderColor: '#999',
-    width: scaleSizeW(60),
+    width: scaleSizeW(70),
   },
 })
 

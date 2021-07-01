@@ -78,7 +78,7 @@ class MyTag extends PureComponent<IMyTag, IMyTagState> {
         onPress={this.onPress}>
         {!checkable && closable && (
           <Image
-            source={require('./assets/deletex-icon.png')}
+            source={require('./assets/delete-red-icon.png')}
             style={[styles.imageStyle, imageStyle]}
           />
         )}

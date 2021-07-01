@@ -11,6 +11,7 @@ interface IMyCheckbox {
   titleProp?: string | number; //指定显示属性名
   checkboxStyle?: StyleProp<TextStyle>;
   onChange?: (checked: boolean, item: any, index: number) => void;
+  isChecked?:(value:any)=>boolean;
 }
 
 /**
@@ -19,7 +20,7 @@ interface IMyCheckbox {
  * @constructor
  */
 const MyCheckbox: FC<IMyCheckbox> = (props) => {
-  const {list, titleProp, keyProp, checkboxStyle, onChange} = props;
+  const {list, titleProp, keyProp, checkboxStyle, onChange,isChecked} = props;
   return (
     <List>
       {Array.isArray(list) &&
@@ -30,7 +31,9 @@ const MyCheckbox: FC<IMyCheckbox> = (props) => {
               !!onChange && onChange(event.target.checked, item, index);
             }}
             checkboxStyle={checkboxStyle}
-            defaultChecked={item.defaultChecked}>
+            defaultChecked={item.defaultChecked}
+            checked={isChecked&&isChecked(item)}
+          >
             {item[titleProp || 'dictValue']}
           </CheckboxItem>
         ))}

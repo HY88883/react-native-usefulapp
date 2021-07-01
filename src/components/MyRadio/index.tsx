@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import {List, Radio} from "@ant-design/react-native";
 import {StyleProp, TextStyle} from "react-native";
+import Func from "../../utils/Func";
 
 const RadioItem = Radio.RadioItem;
 
@@ -11,6 +12,7 @@ interface IMyRadioItem {
     keyProp?:string|number;
     titleProp?:string|number;
     defaultIndex?:number;
+    isChecked?:(value:any)=>boolean;
 }
 
 interface IMyRadioItemState{
@@ -27,9 +29,13 @@ class MyRadio extends PureComponent<IMyRadioItem, IMyRadioItemState> {
         defaultIndex:-1
     }
 
-  state={
-      radioIndex:-1
-  }
+    constructor(props){
+        super(props)
+        this.state={
+            radioIndex:-1
+        }
+    }
+
 
   onChange =(checked: boolean, item: object, index: number)=>{
         const {onChange}=this.props
@@ -40,22 +46,22 @@ class MyRadio extends PureComponent<IMyRadioItem, IMyRadioItemState> {
   }
 
   render() {
-      const {list,style,keyProp,titleProp,defaultIndex}=this.props;
+      const {list,style,keyProp,titleProp,defaultIndex,isChecked}=this.props;
       const {radioIndex}=this.state
     return (
         <List>
             {
                 Array.isArray(list)&&list.map((item,index)=>(
                     <RadioItem
-                        key={item[keyProp||'dictKey']||index}
+                        key={typeof item==='string'?index:(item[keyProp||'dictKey']||index)}
                         defaultChecked={defaultIndex===index}
-                        checked={radioIndex === index}
+                        checked={isChecked?isChecked(item):radioIndex === index}
                         onChange={(event: { target: { checked: boolean; }; })=>{
                             this.onChange(event.target.checked,item,index)
                         }}
                         style={style}
                     >
-                        {item[titleProp||'dictValue']}
+                        {typeof item==='string'?item:item[titleProp||'dictValue']}
                     </RadioItem>
                 ))
             }

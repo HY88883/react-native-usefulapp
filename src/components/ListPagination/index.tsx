@@ -21,7 +21,7 @@ interface IListPagination {
   pageParams?: IPageParams;
   renderItem: ListRenderItem<any> | null | undefined;
   keyExtractor?: (item: any, index: number) => string;
-    onRef?:(ref:any)=>void;
+  ListHeaderComponent?: React.ComponentType<any> | React.ReactElement | null;
 }
 
 interface IListPaginationState {
@@ -50,9 +50,6 @@ class ListPagination extends PureComponent<
           isFetchLoading: false,
           list: [],
       };
-     if(props.onRef){
-         props.onRef(this)
-     }
   }
 
   pagination = {
@@ -140,7 +137,7 @@ class ListPagination extends PureComponent<
 
   render() {
     const {list, isFirstLoading} = this.state;
-    const {renderItem, keyExtractor} = this.props;
+    const {renderItem, keyExtractor,ListHeaderComponent} = this.props;
     return (
       <FlatList
         style={styles.flatList}
@@ -161,6 +158,7 @@ class ListPagination extends PureComponent<
           />
         }
         ListFooterComponent={this.footer()}
+        ListHeaderComponent={ListHeaderComponent}
       />
     );
   }

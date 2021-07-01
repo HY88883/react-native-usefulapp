@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: scaleSizeW(4),
-    width: scaleSizeW(100),
   },
   textStyle: {
     fontSize: setSpText(14),
